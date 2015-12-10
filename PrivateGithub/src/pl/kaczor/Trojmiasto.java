@@ -41,14 +41,16 @@ public class Trojmiasto {
                 String inputLine;
                 State state = State.OTHER;
                 while ((inputLine = in.readLine()) != null) {
-                    if (inputLine.contains("<h2>Konkurs rozstrzyg") || inputLine.contains("<h2>Konkurs zako"))
+                    if (inputLine.contains("<h2>Konkurs rozstrzyg") || inputLine.contains("<h2>Konkurs zako")) {
                         state = State.FINISHED;
-                    else if (inputLine.contains("<h3>Nie znaleziono konkursu"))
+                    } else if (inputLine.contains("<h3>Nie znaleziono konkursu")) {
                         state = State.NOT_FOUND;
-                    else if (inputLine.contains("<h3>Twoja odpowie") || inputLine.contains("<h3>Twoja wypowie"))
+                    } else if (inputLine.contains("<h3>Twoja odpowie") || inputLine.contains("<h3>Twoja wypowie")) {
                         state = State.FOUND;
-                    if (state != State.OTHER)
+                    }
+                    if (state != State.OTHER) {
                         break;
+                    }
                 }
                 System.out.println("Stan: " + state.name());
 
@@ -58,18 +60,18 @@ public class Trojmiasto {
                         idkiKopia.add(idPlusOne);
                     } else if (state == State.NOT_FOUND) { // jeszcze nie ma - zostaw na miejscu
                         idkiKopia.add(id);
-                    } else { // inna sytuacja (blad?) - pomin, sprawdzaj w przyszlosci, a tymczasem przejdz do
-                             // nastepnego id
+                    } else { // inna sytuacja (blad?) - pomin, sprawdzaj w przyszlosci, a tymczasem przejdz do nastepnego id
                         idkiKopia.add(idPlusOne);
                         idkiKopia.add(id);
                     }
                 } else {
-                    if (state == State.FOUND) // znaleziono - wyswietl, nie sprawdzaj dalej
+                    if (state == State.FOUND) { // znaleziono - wyswietl, nie sprawdzaj dalej
                         showAndLog(id);
-                    else if (state == State.FINISHED) // zakonczony - nie sprawdzaj dalej
+                    } else if (state == State.FINISHED) { // zakonczony - nie sprawdzaj dalej
                         continue;
-                    else // inna sytuacja - sprawdzaj dalej
+                    } else { // inna sytuacja - sprawdzaj dalej
                         idkiKopia.add(id);
+                    }
                 }
             }
 
@@ -78,7 +80,7 @@ public class Trojmiasto {
 
             try {
                 System.out.println("czekam 30 sekund od..." + Calendar.getInstance().getTime().toString());
-                Thread.sleep(30000l);
+                Thread.sleep(30000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -91,12 +93,13 @@ public class Trojmiasto {
     }
 
     private static void showAndLog(String id) {
-        if (Desktop.isDesktopSupported())
+        if (Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(new URI(ADRES + id));
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
+        }
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(LOG), StandardOpenOption.APPEND)) {
             writer.write(ADRES + id + " " + Calendar.getInstance().getTime().toString() + "\n");
         } catch (IOException e) {

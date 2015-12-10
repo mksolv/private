@@ -14,7 +14,7 @@ public class IntUtils {
         Arrays.setAll(tab, new IntUnaryOperator() {
             @Override
             public int applyAsInt(int operand) {
-                return operand+offset;
+                return operand + offset;
             }
         });
         return tab;

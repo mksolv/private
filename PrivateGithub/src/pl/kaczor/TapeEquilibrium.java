@@ -1,6 +1,7 @@
 package pl.kaczor;
 
 public class TapeEquilibrium {
+
     public static int solution(int[] A) {
         int[] orderedSum = new int[A.length];
         orderedSum[0] = A[0];
@@ -15,10 +16,11 @@ public class TapeEquilibrium {
         }
 
         int diff = Math.abs(orderedSum[0] - reversedSum[1]);
-        for (int i = 1; i < A.length-2; i++) {
-            int tmpDiff = Math.abs(orderedSum[i] - reversedSum[i+1]);
-            if (tmpDiff < diff)
+        for (int i = 1; i < A.length - 2; i++) {
+            int tmpDiff = Math.abs(orderedSum[i] - reversedSum[i + 1]);
+            if (tmpDiff < diff) {
                 diff = tmpDiff;
+            }
         }
 
         return diff;

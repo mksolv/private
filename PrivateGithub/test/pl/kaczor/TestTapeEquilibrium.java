@@ -43,7 +43,7 @@ public class TestTapeEquilibrium {
     }
 
     @Test
-    public void testSolutionXL() throws Exception {
+    public void testSolutionXl() throws Exception {
         Arrays.fill(maxAll, 1000);
         assertEquals(0, TapeEquilibrium.solution(maxAll));
     }
