@@ -1,4 +1,4 @@
-package pl.kaczor;
+package pl.kaczor.codility.lessons.timecplx;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import pl.kaczor.codility.lesssons.timecplx.TapeEquilibrium;
 import pl.kaczor.utils.IntUtils;
 
 public class TestTapeEquilibrium {

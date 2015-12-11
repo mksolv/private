@@ -1,8 +1,10 @@
-package pl.kaczor;
+package pl.kaczor.codility.lessons.timecplx;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import pl.kaczor.codility.lesssons.timecplx.FrogJmp;
 
 public class TestFrogJmp {
     @Test

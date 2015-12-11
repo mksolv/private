@@ -29,4 +29,14 @@ public class IntUtils {
 
         return output;
     }
+
+    public static int max(int[] tab) {
+        int result = Integer.MIN_VALUE;
+        for (int i = 0; i < tab.length; i++) {
+            if (tab[i] > result) {
+                result = tab[i];
+            }
+        }
+        return result;
+    }
 }
