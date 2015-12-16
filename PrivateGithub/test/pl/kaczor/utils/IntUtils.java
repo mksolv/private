@@ -11,11 +11,14 @@ public class IntUtils {
 
     public static int[] getConsecutiveIntArray(int size, int offset) {
         int[] tab = new int[size];
-        Arrays.setAll(tab, new IntUnaryOperator() {
-            @Override
-            public int applyAsInt(int operand) {
-                return operand + offset;
-            }
+//        Arrays.setAll(tab, new IntUnaryOperator() {
+//            @Override
+//            public int applyAsInt(int operand) {
+//                return operand + offset;
+//            }
+//        });
+        Arrays.setAll(tab, operand -> {
+            return operand + offset;
         });
         return tab;
     }
