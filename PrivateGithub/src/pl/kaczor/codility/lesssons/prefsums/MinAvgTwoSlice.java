@@ -1,18 +1,13 @@
 package pl.kaczor.codility.lesssons.prefsums;
 
+/**
+ * Najmniejsza srednia moze byc tylko w kawalkach 2-elementowych (jesli oba elementy sa dodatnie) lub 3-elementowych
+ * (jesli ktorys z elementow jest ujemny)
+ *
+ * @author mateusz.kaczmarek
+ *
+ */
 public class MinAvgTwoSlice {
-
-    private class Slice {
-        int start;
-        int length;
-        double average;
-
-        public Slice(int start, int length, double average) {
-            this.start = start;
-            this.length = length;
-            this.average = average;
-        }
-    }
 
     public int solution(int[] A) {
         int smallestSum = Integer.MAX_VALUE;
@@ -26,43 +21,20 @@ public class MinAvgTwoSlice {
             }
         }
 
-        if (smallestSum < 0) {
-            Slice resultSlice = new Slice(result, 2, (double) smallestSum / 2);
-            Slice expandedSlice = expandSlice(A, resultSlice);
-            while (expandedSlice.average < resultSlice.average) {
-                resultSlice = expandedSlice;
-                expandedSlice = expandSlice(A, resultSlice);
+        if (A[result] < 0 || A[result + 1] < 0) {
+            double smallestAvg = (double) smallestSum / 2;
+            double currentAvg;
+            for (int i = 0; i < A.length - 2; i++) {
+                currentSum = A[i] + A[i + 1] + A[i + 2];
+                currentAvg = (double) currentSum / 3;
+                if (currentAvg < smallestAvg) {
+                    smallestAvg = currentAvg;
+                    result = i;
+                }
             }
-            result = resultSlice.start;
         }
 
         return result;
     }
 
-    private Slice expandSlice(int[] a, Slice s) {
-        int newLength = s.length + 1;
-        if (s.start > 0) { // expanding left
-            int leftExpandedSum = 0;
-            int leftStart = s.start - 1;
-            for (int i = leftStart; i < s.start + s.length; i++) {
-                leftExpandedSum += a[i];
-            }
-            double leftAverage = (double) leftExpandedSum / newLength;
-            if (leftAverage < s.average) {
-                s = new Slice(s.start - 1, s.length + 1, leftAverage);
-            }
-        }
-        if (s.start + s.length < a.length) { // expanding right
-            int rightExpandedSum = 0;
-            for (int i = s.start; i < s.start + s.length; i++) {
-                rightExpandedSum += a[i];
-            }
-            double rightAverage = (double) rightExpandedSum / newLength;
-            if (rightAverage < s.average) {
-                s = new Slice(s.start, s.length + 1, rightAverage);
-            }
-
-        }
-        return s;
-    }
 }
